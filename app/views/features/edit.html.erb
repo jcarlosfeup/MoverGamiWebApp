@@ -1,0 +1,10 @@
+<% if current_user %>
+	<h1>Editing feature</h1>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Show', @feature %> |
+	<%= link_to 'Back', features_path %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

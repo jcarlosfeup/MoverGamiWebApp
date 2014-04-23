@@ -1,0 +1,35 @@
+<% if current_user %>
+  <h1>Listing features</h1>
+
+  <% if @features.size == 0 %>
+
+    <p> You don't have any features added.</p>
+
+  <% else %>  
+
+  <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @features.each do |feature| %>
+    <tr>
+      <td><%= feature.name %></td>
+      <td><%= link_to 'Show', feature %></td>
+      <td><%= link_to 'Edit', edit_feature_path(feature) %></td>
+      <td><%= link_to 'Destroy', feature, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <% end %>
+
+  <br />
+
+  <%= link_to 'New Feature', new_feature_path, :class => 'btn btn-primary' %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

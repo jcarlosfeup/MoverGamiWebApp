@@ -1,0 +1,28 @@
+<% if current_user %> 
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Description:</b>
+    <%= @challenge.description %>
+  </p>
+
+  <p>
+    <b>Trigger:</b> <br/>
+    <b> Feature:</b> <%= @challenge.trigger.feature.name %> <br/>
+    <b> Value: </b> <%= @challenge.trigger.threshold %> <br/>
+    <b> This challenge is triggered if the user don't achieve this value in: </b> <%= @challenge.trigger.timeframe.value %> s
+  </p>
+
+  <p>
+    <b>Goal:</b> <br/>
+    <b> Feature:</b> <%= @challenge.goal.feature.name %> <br/>
+    <b> Value: </b> <%= @challenge.goal.threshold %> <br/>
+    <b> This challenge can be completed if the user achieves this value in: </b> <%= @challenge.goal.timeframe.value %> s
+  </p>
+
+  <%= link_to 'Edit', edit_challenge_path(@challenge) %> |
+  <%= link_to 'Back', challenges_path %>
+
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>  

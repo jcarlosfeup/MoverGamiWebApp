@@ -1,0 +1,40 @@
+<%= form_for(@fact) do |f| %>
+  
+  <% if @fact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fact.errors.count, "error") %> prohibited this fact from being saved:</h2>
+
+      <ul>
+      <% @fact.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %> <br />
+    <%= f.text_field :description,:required => true, placeholder: "Write here your statement", :maxlength=>"254" %>
+  </div>
+
+  <div>
+    <%= fields_for "fact",@fact.restriction do |restr_form| %>
+      <p>
+        <%= f.label :restriction %><br />
+        <%= restr_form.number_field :threshold,:required => true, placeholder: "Digit a decimal value here", :maxlength=>"50" %>
+      </p>
+    
+      <%= fields_for "fact",@fact.restriction.feature do |feat_form| %>
+        <p>
+          <%= collection_select(:feature,:id,Feature.all,:id,:name,options ={:prompt => "-Select a feature"},:required => true, :class =>"feature") %>
+        </p>
+      <% end %>
+
+    <% end %>
+    
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

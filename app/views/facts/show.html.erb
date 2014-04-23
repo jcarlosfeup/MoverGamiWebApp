@@ -1,0 +1,20 @@
+<% if current_user %>
+	<p id="notice"><%= notice %></p>
+
+	<p>
+	  <b>Description:</b>
+	  <%= @fact.description %>
+	</br>
+	  <b> Threshold: </b>
+	  <%= @fact.restriction.threshold %>
+	 </br>
+	  <b> Feature: </b>
+	  <%= @fact.restriction.feature.name %>
+	</p>
+
+	<%= link_to 'Edit', edit_fact_path(@fact) %> |
+	<%= link_to 'Back', facts_path %>
+
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

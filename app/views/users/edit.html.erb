@@ -1,0 +1,9 @@
+<% if current_user %>
+	<%- model_class = User -%>
+	<div class="page-header">
+	  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+	</div>
+	<%= render :partial => 'form' %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

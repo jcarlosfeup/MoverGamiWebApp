@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @timeframe.type_limit %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @timeframe.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_timeframe_path(@timeframe) %> |
+<%= link_to 'Back', timeframes_path %>

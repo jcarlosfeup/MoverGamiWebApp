@@ -1,0 +1,10 @@
+<% if current_user %>
+<h1>Editing badge</h1>
+
+	<%= render 'form' %>
+<% else %>
+	<h3> You must be logged in to proceed. <h3>
+<% end %>
+
+<%= link_to 'Show', @badge %> |
+<%= link_to 'Back', badges_path %>

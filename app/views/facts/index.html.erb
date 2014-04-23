@@ -1,0 +1,39 @@
+<% if current_user %>  
+  <h1>Listing facts</h1>
+
+  <% if @facts.size == 0 %>
+
+    <p> You don't have any facts added.</p>
+
+  <% else %>  
+    <table class="table table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Description</th>
+        <th>Feature</th>
+        <th>Threshold</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+
+    <% @facts.each do |fact| %>
+      <tr>
+        <td><%= fact.id %></td>
+        <td><%= fact.description %></td>
+        <td><%= fact.restriction.feature.name %></td>
+        <td><%= fact.restriction.threshold %></td>
+        <td><%= link_to 'Show', fact %></td>
+        <td><%= link_to 'Edit', edit_fact_path(fact) %></td>
+        <td><%= link_to 'Destroy', fact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+  <% end %>
+
+  <br />
+
+  <%= link_to 'New Fact', new_fact_path, :class => 'btn btn-primary' %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

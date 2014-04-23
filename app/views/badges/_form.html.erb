@@ -1,0 +1,73 @@
+<%= form_for(@badge) do |f| %>
+  <% if @badge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@badge.errors.count, "error") %> prohibited this badge from being saved:</h2>
+
+      <ul>
+      <% @badge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name,:required => true,:maxlength=>"20" %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.text_field :image,:required => true, placeholder: "image URL"%>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description,:required => true, placeholder: "Write a short description." %>
+  </div>
+
+  <div>
+    <%= fields_for "badge",@badge.restriction do |badge_form| %>
+      <p>
+        <%= f.label :restriction %><br />
+        <%= badge_form.number_field :threshold,:required => true, placeholder: "Decimal value to be achieved", :maxlength=>"20" %>
+      </p>
+    
+    <%= fields_for "badge",@badge.restriction.feature do |feat_form| %>
+        <p>
+          <%= collection_select(:feature,:id,Feature.all,:id,:name,options ={:prompt => "-Select a feature"},:required => true, :class =>"feature") %>
+        </p>
+      <% end %>
+
+    <% end %>
+    
+  </div>
+
+  <div>
+    <p>
+      <b> <%= f.label(:name,"Time limit?") %> </b>
+        <%= check_box("tag","limit") %>
+      </p>
+  </div>
+
+   <div id="timeframe_section">
+
+    <%= fields_for "badge",@badge.restriction.timeframe do |tf_type_form| %>
+      <p>
+        <%= f.label :timeframe %><br />
+        <%= select("type_limit","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"}) %>
+      </p>
+    
+    <%= fields_for "badge",@badge.restriction.timeframe do |tf_value_form| %>
+      <p>
+        <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
+      </p>
+      <% end %>
+
+    <% end %>
+    
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

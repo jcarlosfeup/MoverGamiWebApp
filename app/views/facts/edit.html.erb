@@ -1,0 +1,10 @@
+<% if current_user %>
+	<h1>Editing fact</h1>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Show', @fact %> |
+	<%= link_to 'Back', facts_path %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

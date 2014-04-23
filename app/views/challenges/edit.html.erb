@@ -1,0 +1,10 @@
+<% if current_user %>
+	<h1>Editing challenge</h1>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Show', @challenge %> |
+	<%= link_to 'Back', challenges_path %>
+<% else %>
+	<h3> You must be logged in to proceed. <h3>
+<% end %>

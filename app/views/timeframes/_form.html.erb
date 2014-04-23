@@ -1,0 +1,25 @@
+<%= form_for(@timeframe) do |f| %>
+  <% if @timeframe.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@timeframe.errors.count, "error") %> prohibited this timeframe from being saved:</h2>
+
+      <ul>
+      <% @timeframe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type_limit %><br />
+    <%= f.text_field :type_limit %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.number_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

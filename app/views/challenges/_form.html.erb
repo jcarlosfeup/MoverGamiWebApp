@@ -1,0 +1,84 @@
+<%= form_for(@challenge) do |f| %>
+  <% if @challenge.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@challenge.errors.count, "error") %> prohibited this challenge from being saved:</h2>
+
+      <ul>
+      <% @challenge.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :required => true %>
+  </div>
+
+  <div>
+
+   <%= f.fields_for "feature",@challenge.goal.feature do |feature_form| %>
+        <p>
+          <%= collection_select(:feature,:id,Feature.all,:id,:name,options ={:prompt => "-Select a feature"},:required => true, :class =>"feature") %>
+        </p>
+    <% end %>
+
+    <%= f.fields_for "trigger",@challenge.trigger do |challenge_form| %>
+      <p>
+        <b> Restriction to start the challenge (trigger) </b><br />
+        <%= challenge_form.number_field :threshold,:required => true, placeholder: "Decimal value to be achieved", :maxlength=>"20",:required => true %>
+      </p>
+    <% end %>
+
+    <div id="tf_trigger_section">
+
+      <%= f.fields_for "trigger",@challenge.trigger.timeframe do |tf_trigger_form| %>
+        <p>
+          Timeframe <br />
+          <%= select("type_limit","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"},:required => true) %>
+        </p>
+      
+      <%= f.fields_for "trigger_timeframe",@challenge.trigger.timeframe do |tf_value_form| %>
+        <p>
+          <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
+        </p>
+        <% end %>
+
+      <% end %>
+      
+    </div>
+    
+    <%= f.fields_for "goal",@challenge.goal do |chl_form| %>
+      <p>
+        <b> Restriction to complete challenge (goal) </b><br />
+        <%= chl_form.number_field :threshold,:required => true, placeholder: "Decimal value to be achieved", :maxlength=>"20",:required => true %>
+      </p>
+    <% end %>
+
+     <div id="tf_goal_section">
+
+      <%= f.fields_for "goal",@challenge.goal.timeframe do |tf_goal_form| %>
+        <p>
+          Timeframe <br />
+          <%= select("type_limit_goal","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"},:required => true) %>
+        </p>
+      
+      <%= f.fields_for "goal_timeframe",@challenge.goal.timeframe do |tf_value_form| %>
+        <p>
+          <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
+        </p>
+        <% end %>
+
+      <% end %>
+      
+    </div>
+
+  </div>
+
+ 
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

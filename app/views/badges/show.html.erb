@@ -1,0 +1,46 @@
+<% if current_user %>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>Name:</b>
+    <%= @badge.name %>
+  </p>
+
+  <p>
+    <b>Description:</b>
+    <%= @badge.description %>
+  </p>
+
+  <p>
+    <b>Image:</b> <br/>
+     <%= image_tag(@badge.image,size: "300x320", alt: "badge_icon") %>
+  </p>
+
+  <p>
+    <b>Restriction:</b>
+    <%= @badge.restriction.threshold %>
+  </p>
+
+  <p>
+    <b>Feature:</b>
+    <%= @badge.restriction.feature.name %>
+  </p>
+  <br/>
+
+  <% if @badge.restriction.timeframe != nil %>
+    <p>
+      <b>Timeframe:</b> <br/> 
+      <b> Type: </b> 
+      <%= @badge.restriction.timeframe.type_limit %> <br/>
+      <b> Value:</b> 
+      <%= @badge.restriction.timeframe.value %> s
+    </p>
+  <% end %>
+
+
+  <%= link_to 'Edit', edit_badge_path(@badge) %> |
+  <%= link_to 'Back', badges_path %>
+
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

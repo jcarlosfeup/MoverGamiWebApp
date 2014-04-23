@@ -1,0 +1,39 @@
+<% if current_user %>
+  <h1>Listing badges</h1>
+
+  <% if @badges.size == 0 %>
+
+    <p> You don't have any badges added.</p>
+
+  <% else %>  
+    <table class="table table-bordered">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+
+  <% @badges.each do |badge| %>
+    <tr>
+      <td><%= badge.name %></td>
+      <td><%= badge.description %></td>
+      <td> 
+        <%= image_tag(badge.image,size: "32x20", alt: "badge_icon") %>
+      </td>
+      <td><%= link_to 'Show', badge %></td>
+      <td><%= link_to 'Edit', edit_badge_path(badge) %></td>
+      <td><%= link_to 'Destroy', badge, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+  </table>
+
+  <% end %>
+  <br />
+
+  <%= link_to 'New Badge', new_badge_path,:class => 'btn btn-primary' %>
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>
