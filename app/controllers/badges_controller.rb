@@ -3,10 +3,11 @@ class BadgesController < ApplicationController
   # GET /badges.json
   def index
     @badges = Badge.all
+    @badges_json = @badges.map{ |e| {:badge => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @badges }
+      format.json { render json: @badges_json }
     end
   end
 
