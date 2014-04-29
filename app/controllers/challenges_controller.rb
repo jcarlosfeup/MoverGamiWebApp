@@ -63,7 +63,7 @@ class ChallengesController < ApplicationController
     end
 
     if @tf_trigger.type_limit == "Custom"
-        @new_timeframe = Timeframe.new(:type_limit => "Custom",:value => params[:challenge][:trigger_timeframe][:value])
+        @new_timeframe = Timeframe.new(:type_limit => "Custom",:value => params[:trigger_timeframe][:value])
         @trigger.timeframe = @new_timeframe
       else
         @trigger.timeframe = @tf_trigger
@@ -71,7 +71,7 @@ class ChallengesController < ApplicationController
     
 
     if @tf_goal.type_limit == "Custom"
-        @new_tf = Timeframe.new(:type_limit => "Custom",:value => params[:challenge][:goal_timeframe][:value])
+        @new_tf = Timeframe.new(:type_limit => "Custom",:value => params[:goal_timeframe][:value])
         @goal.timeframe = @new_tf
       else
         @goal.timeframe = @tf_goal
@@ -107,25 +107,25 @@ class ChallengesController < ApplicationController
     @feature = Feature.find(params[:feature][:id])
 
     @tf_trigger = Timeframe.find(params[:type_limit][:id])
-    if params[:type_limit][:id] == "11"
+    if params[:type_limit][:id] == "1"
       @tf_trigger.update_attributes(:type_limit => "Daily",:value => 86400)
-    elsif params[:type_limit][:id] == "17"
+    elsif params[:type_limit][:id] == "2"
       @tf_trigger.update_attributes(:type_limit => "Weekly",:value => 604800) 
-    elsif params[:type_limit][:id] == "13"
+    elsif params[:type_limit][:id] == "3"
       @tf_trigger.update_attributes(:type_limit => "Monthly",:value => 2592000) 
     else 
-      @tf_trigger.update_attributes(:type_limit => "Custom",:value => params[:challenge][:trigger_timeframe][:value]) 
+      @tf_trigger.update_attributes(:type_limit => "Custom",:value => params[:trigger_timeframe][:value]) 
     end
 
     @tf_goal = Timeframe.find(params[:type_limit_goal][:id])
-    if params[:type_limit_goal][:id] == "11"
+    if params[:type_limit_goal][:id] == "1"
       @tf_goal.update_attributes(:type_limit => "Daily",:value => 86400)
-    elsif params[:type_limit_goal][:id] == "17"
+    elsif params[:type_limit_goal][:id] == "2"
       @tf_goal.update_attributes(:type_limit => "Weekly",:value => 604800) 
-   elsif params[:type_limit_goal][:id] == "13"
+   elsif params[:type_limit_goal][:id] == "3"
       @tf_goal.update_attributes(:type_limit => "Monthly",:value => 2592000) 
     else
-      @tf_goal.update_attributes(:type_limit => "Custom",:value => params[:challenge][:goal_timeframe][:value]) 
+      @tf_goal.update_attributes(:type_limit => "Custom",:value => params[:goal_timeframe][:value]) 
     end
 
     @trigger.timeframe = @tf_trigger

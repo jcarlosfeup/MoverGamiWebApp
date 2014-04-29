@@ -59,7 +59,7 @@ class BadgesController < ApplicationController
 
     if @timeframe.type_limit != nil
       if @timeframe.type_limit == "Custom"
-        @new_timeframe = Timeframe.new(:type_limit => "Custom",:value => params[:badge][:value])
+        @new_timeframe = Timeframe.new(:type_limit => "Custom",:value => params[:badge][:badge][:value])
         @restriction.timeframe = @new_timeframe
       else
         @restriction.timeframe = @timeframe
@@ -91,14 +91,14 @@ class BadgesController < ApplicationController
 
     if params[:type_limit][:id] != ""
       @timeframe = Timeframe.find(params[:type_limit][:id])
-      if params[:type_limit][:id] == "11"
+      if params[:type_limit][:id] == "1"
         @timeframe.update_attributes(:type_limit => "Daily",:value => 86400)
-      elsif params[:type_limit][:id] == "17"
+      elsif params[:type_limit][:id] == "2"
         @timeframe.update_attributes(:type_limit => "Weekly",:value => 604800) 
-      elsif params[:type_limit][:id] == "13"
+      elsif params[:type_limit][:id] == "3"
         @timeframe.update_attributes(:type_limit => "Monthly",:value => 2592000) 
       else 
-        @timeframe.update_attributes(:type_limit => "Custom",:value => params[:badge][:value]) 
+        @timeframe.update_attributes(:type_limit => "Custom",:value => params[:badge][:badge][:value]) 
       end
     else
 
@@ -146,6 +146,6 @@ class BadgesController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def badge_params
-      params.require(:badge).permit(:description, :image, :name)
+      params.require(:badge).permit(:description,:image,:name)
     end
 end

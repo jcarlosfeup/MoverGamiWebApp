@@ -7,7 +7,7 @@
 
 $(document).ready ->
   clicked = false
-  $("#badge_value").hide()
+  $("#badge_badge_value").hide()
   $("#timeframe_section").hide() 	
   $("input[type=checkbox]").each ->
     $(this).bind "click", ->
@@ -19,10 +19,10 @@ $(document).ready ->
       	clicked = false
 
 	  $("#type_limit_id").change ->
-		  if $(this).val() == "14"
-		  	$("#badge_value").show()
+		  if $(this).val() == "4"
+		  	$("#badge_badge_value").show()
 		  else
-		    $("#badge_value").hide()
+		    $("#badge_badge_value").hide()
   
 
    

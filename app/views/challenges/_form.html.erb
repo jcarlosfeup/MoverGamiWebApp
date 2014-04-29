@@ -36,10 +36,10 @@
       <%= f.fields_for "trigger",@challenge.trigger.timeframe do |tf_trigger_form| %>
         <p>
           Timeframe <br />
-          <%= select("type_limit","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"},:required => true) %>
+          <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","Custom" => "4"},options ={:prompt => "-Choose time limit"},:required => true) %>
         </p>
       
-      <%= f.fields_for "trigger_timeframe",@challenge.trigger.timeframe do |tf_value_form| %>
+      <%= fields_for "trigger_timeframe",@challenge.trigger.timeframe do |tf_value_form| %>
         <p>
           <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
         </p>
@@ -61,14 +61,17 @@
       <%= f.fields_for "goal",@challenge.goal.timeframe do |tf_goal_form| %>
         <p>
           Timeframe <br />
-          <%= select("type_limit_goal","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"},:required => true) %>
+          <%= select("type_limit_goal","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","Custom" => "4"},options ={:prompt => "-Choose time limit"},:required => true) %>
         </p>
       
-      <%= f.fields_for "goal_timeframe",@challenge.goal.timeframe do |tf_value_form| %>
+      <%= fields_for "goal_timeframe",@challenge.goal.timeframe do |tf_value_form| %>
         <p>
           <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
         </p>
+
         <% end %>
+
+
 
       <% end %>
       

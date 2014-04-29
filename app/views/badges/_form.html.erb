@@ -53,14 +53,15 @@
     <%= fields_for "badge",@badge.restriction.timeframe do |tf_type_form| %>
       <p>
         <%= f.label :timeframe %><br />
-        <%= select("type_limit","id", { "Daily" => "11", "Weekly" => "17","Monthly" => "13","Custom" => "14"},options ={:prompt => "-Choose time limit"}) %>
+        <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","Custom" => "4"},options ={:prompt => "-Choose time limit"}) %>
       </p>
+    <% end %>
     
-    <%= fields_for "badge",@badge.restriction.timeframe do |tf_value_form| %>
+    <%= f.fields_for "badge",@badge.restriction.timeframe do |tf_value_form| %>
       <p>
         <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
       </p>
-      <% end %>
+     
 
     <% end %>
     
