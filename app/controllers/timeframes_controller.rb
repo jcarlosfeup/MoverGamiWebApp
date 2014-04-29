@@ -3,10 +3,11 @@ class TimeframesController < ApplicationController
   # GET /timeframes.json
   def index
     @timeframes = Timeframe.all
+    @timeframes_json = @timeframes.map{ |e| {:timeframe => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @timeframes }
+      format.json { render json: @timeframes_json}
     end
   end
 
