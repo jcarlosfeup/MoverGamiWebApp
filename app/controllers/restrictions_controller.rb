@@ -3,10 +3,11 @@ class RestrictionsController < ApplicationController
   # GET /restrictions.json
   def index
     @restrictions = Restriction.all
+    @restrs_json = @restrictions.map{ |e| {:restriction => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @restrictions }
+      format.json { render json: @restrs_json }
     end
   end
 

@@ -3,10 +3,11 @@ class FactsController < ApplicationController
   # GET /facts.json
   def index
     @facts = Fact.all
+    @facts_json = @facts.map{ |e| {:fact => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @facts }
+      format.json { render json: @facts_json }
     end
   end
 

@@ -3,10 +3,11 @@ class FeaturesController < ApplicationController
   # GET /features.json
   def index
     @features = Feature.all
+    @features_json = @features.map{ |e| {:feature => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @features }
+      format.json { render json: @features_json }
     end
   end
 

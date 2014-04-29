@@ -3,10 +3,11 @@ class RewardsController < ApplicationController
   # GET /rewards.json
   def index
     @rewards = Reward.all
+    @rewards_json = @rewards.map{ |e| {:reward => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @rewards }
+      format.json { render json: @rewards_json }
     end
   end
 
