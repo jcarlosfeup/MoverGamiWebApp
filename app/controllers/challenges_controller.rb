@@ -3,10 +3,11 @@ class ChallengesController < ApplicationController
   # GET /challenges.json
   def index
     @challenges = Challenge.all
+    @chls_json = @challenges.map{ |e| {:challenge => e}}
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @challenges }
+      format.json { render json: @chls_json }
     end
   end
 
