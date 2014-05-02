@@ -28,6 +28,7 @@ class BadgesController < ApplicationController
     @badge = Badge.new
     @restriction = @badge.build_restriction
     @feature = @restriction.build_feature
+    @activity = @restriction.build_activity
     @timeframe = @restriction.build_timeframe
 
     respond_to do |format|
@@ -50,6 +51,7 @@ class BadgesController < ApplicationController
     @restriction = @badge.build_restriction
     @timeframe = @restriction.build_timeframe
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
     
     if params[:type_limit][:id] != ""
       @timeframe = Timeframe.find(params[:type_limit][:id])
@@ -57,6 +59,7 @@ class BadgesController < ApplicationController
 
     @restriction = Restriction.new(:threshold => params[:badge][:threshold])
     @restriction.feature = @feature
+    @restriction.activity = @activity
 
     if @timeframe.type_limit != nil
       if @timeframe.type_limit == "Custom"
@@ -89,6 +92,7 @@ class BadgesController < ApplicationController
     @restriction = Restriction.find(@badge.restriction_id)
     @restriction.update_attribute(:threshold,params[:badge][:threshold])
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
 
     if params[:type_limit][:id] != ""
       @timeframe = Timeframe.find(params[:type_limit][:id])
@@ -110,6 +114,7 @@ class BadgesController < ApplicationController
 
     @restriction.timeframe = @timeframe
     @restriction.feature = @feature
+    @restriction.activity = @activity
     @restriction.save
 
     respond_to do |format|
@@ -133,6 +138,7 @@ class BadgesController < ApplicationController
       @restriction.timeframe.destroy
     end
 
+    @restriction.destroy
     @badge.destroy
 
     respond_to do |format|

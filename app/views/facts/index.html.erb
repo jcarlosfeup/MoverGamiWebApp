@@ -10,6 +10,7 @@
       <tr>
         <th>ID</th>
         <th>Description</th>
+        <th>Activity</th>
         <th>Feature</th>
         <th>Threshold</th>
         <th></th>
@@ -21,6 +22,7 @@
       <tr>
         <td><%= fact.id %></td>
         <td><%= fact.description %></td>
+        <td><%= fact.restriction.activity.name %></td>
         <td><%= fact.restriction.feature.name %></td>
         <td><%= fact.restriction.threshold %></td>
         <td><%= link_to 'Show', fact %></td>

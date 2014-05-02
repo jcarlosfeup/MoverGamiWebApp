@@ -4,12 +4,19 @@
 	<p>
 	  <b>Description:</b>
 	  <%= @fact.description %>
+	</p>
+	
+	<p>
+	</br>
+	  <b> Activity: </b>
+	  <%= @fact.restriction.activity.name %>
+	</br>
+	  <b> Feature: </b>
+	  <%= @fact.restriction.feature.name %>
 	</br>
 	  <b> Threshold: </b>
 	  <%= @fact.restriction.threshold %>
-	 </br>
-	  <b> Feature: </b>
-	  <%= @fact.restriction.feature.name %>
+	
 	</p>
 
 	<%= link_to 'Edit', edit_fact_path(@fact) %> |

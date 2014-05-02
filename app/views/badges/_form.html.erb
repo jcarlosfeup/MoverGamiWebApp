@@ -25,20 +25,25 @@
   </div>
 
   <div>
-    <%= fields_for "badge",@badge.restriction do |badge_form| %>
+
+    <%= fields_for "badge",@badge.restriction.activity do |actvity_form| %>
       <p>
         <%= f.label :restriction %><br />
-        <%= badge_form.number_field :threshold,:required => true, placeholder: "Decimal value to be achieved", :maxlength=>"20" %>
+        <%= collection_select(:activity,:id,Activity.all,:id,:name,options ={:prompt => "-Select an activity"},:required => true, :class =>"activity") %>
       </p>
-    
+    <% end %>
+
     <%= fields_for "badge",@badge.restriction.feature do |feat_form| %>
         <p>
           <%= collection_select(:feature,:id,Feature.all,:id,:name,options ={:prompt => "-Select a feature"},:required => true, :class =>"feature") %>
         </p>
       <% end %>
 
+    <%= fields_for "badge",@badge.restriction do |badge_form| %>
+      <p>        
+        <%= badge_form.number_field :threshold,:required => true, placeholder: "Decimal value to be achieved", :maxlength=>"20" %>
+      </p>
     <% end %>
-    
   </div>
 
   <div>

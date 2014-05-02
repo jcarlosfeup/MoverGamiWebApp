@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140421170948) do
+ActiveRecord::Schema.define(:version => 20140502105807) do
+
+  create_table "activities", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "badges", :force => true do |t|
     t.string   "name"
@@ -53,8 +59,10 @@ ActiveRecord::Schema.define(:version => 20140421170948) do
     t.datetime "updated_at",   :null => false
     t.integer  "feature_id"
     t.integer  "timeframe_id"
+    t.integer  "activity_id"
   end
 
+  add_index "restrictions", ["activity_id"], :name => "index_restrictions_on_activity_id"
   add_index "restrictions", ["feature_id"], :name => "index_restrictions_on_feature_id"
   add_index "restrictions", ["timeframe_id"], :name => "index_restrictions_on_timeframe_id"
 

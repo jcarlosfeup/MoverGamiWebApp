@@ -28,8 +28,10 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.new
     @trigger = @challenge.build_trigger
     @t_feature = @trigger.build_feature
+    @t_activity = @trigger.build_activity
     @goal = @challenge.build_goal
     @g_feature = @goal.build_feature
+    @g_activity = @goal.build_activity
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,12 +53,15 @@ class ChallengesController < ApplicationController
   def create
     @challenge = Challenge.new(challenge_params)
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
     
     @trigger = Restriction.new(:threshold => params[:challenge][:trigger_attributes][:threshold])
     @trigger.feature = @feature
+    @trigger.activity = @activity
 
     @goal = Restriction.new(:threshold => params[:challenge][:goal_attributes][:threshold])
     @goal.feature = @feature
+    @goal.activity = @activity
     
     if params[:type_limit][:id] != "" and params[:type_limit_goal][:id] != ""
       @tf_trigger = Timeframe.find(params[:type_limit][:id])
@@ -106,6 +111,7 @@ class ChallengesController < ApplicationController
     @goal.update_attribute(:threshold,params[:challenge][:goal_attributes][:threshold])
  
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
 
     @tf_trigger = Timeframe.find(params[:type_limit][:id])
     if params[:type_limit][:id] == "1"
@@ -133,7 +139,9 @@ class ChallengesController < ApplicationController
     @goal.timeframe = @tf_goal
     
     @trigger.feature = @feature
+    @trigger.activity = @activity
     @goal.feature = @feature
+    @goal.activity = @activity
     
     @trigger.save
     @goal.save
@@ -164,7 +172,8 @@ class ChallengesController < ApplicationController
       @goal.timeframe.destroy
     end
       
-
+   @trigger.destroy
+   @goal.destroy
    @challenge.destroy
 
     respond_to do |format|

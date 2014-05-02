@@ -4,11 +4,13 @@ class Restriction < ActiveRecord::Base
   has_many :badges
   has_many :challenges
   belongs_to :feature
+  belongs_to :activity
   belongs_to :timeframe
   
-  accepts_nested_attributes_for :feature, :timeframe
+  accepts_nested_attributes_for :feature,:activity, :timeframe
 
   validates :threshold, presence: true, :numericality => {:greater_than => 0}
   validates :feature, presence: true
+  validates :activity, presence: true
 	
 end

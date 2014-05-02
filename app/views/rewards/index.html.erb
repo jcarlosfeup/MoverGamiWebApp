@@ -1,6 +1,12 @@
 <h1>Listing rewards</h1>
 
-<table>
+<% if @rewards.size == 0 %>
+
+    <p> You don't have any reward added.</p>
+
+  <% else %>  
+
+<table class="table table-bordered">
   <tr>
     <th>Url</th>
     <th>Type</th>
@@ -20,6 +26,8 @@
 <% end %>
 </table>
 
+<% end %>
 <br />
 
-<%= link_to 'New Reward', new_reward_path %>
+<%= link_to 'New Reward', new_reward_path, :class => 'btn btn-primary' %>
+

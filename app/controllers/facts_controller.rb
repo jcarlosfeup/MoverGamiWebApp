@@ -29,6 +29,7 @@ class FactsController < ApplicationController
     @fact = Fact.new
     @restriction = @fact.build_restriction
     @feature = @restriction.build_feature
+    @activity = @restriction.build_activity
     
     respond_to do |format|
       format.html # new.html.erb
@@ -46,12 +47,13 @@ class FactsController < ApplicationController
   def create
     @fact = Fact.new(fact_params)
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
     @restriction = Restriction.new(:threshold => params[:fact][:threshold])
     @restriction.feature = @feature
+    @restriction.activity = @activity
     @restriction.save
     
     @fact.restriction = @restriction
-    #@fact.restriction_id = @restriction.id
     
   respond_to do |format|
       if @fact.save
@@ -71,7 +73,9 @@ class FactsController < ApplicationController
     @restriction = Restriction.find(@fact.restriction_id)
     @restriction.update_attribute(:threshold,params[:fact][:threshold])
     @feature = Feature.find(params[:feature][:id])
+    @activity = Activity.find(params[:activity][:id])
     @restriction.feature = @feature
+    @restriction.activity = @activity
     @restriction.save
 
     respond_to do |format|
@@ -89,6 +93,9 @@ class FactsController < ApplicationController
   # DELETE /facts/1.json
   def destroy
     @fact = Fact.find(params[:id])
+    @restriction = Restriction.find(@fact.restriction.id)
+  
+    @restriction.destroy
     @fact.destroy
 
     respond_to do |format|
