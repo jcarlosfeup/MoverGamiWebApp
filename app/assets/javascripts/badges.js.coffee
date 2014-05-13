@@ -6,19 +6,8 @@
 
 
 $(document).ready ->
-  clicked = false
-  $("#badge_badge_value").hide()
-  $("#timeframe_section").hide() 	
-  $("input[type=checkbox]").each ->
-    $(this).bind "click", ->
-      if clicked == false
-      	$("#timeframe_section").show()
-      	clicked = true
-      else
-      	$("#timeframe_section").hide()
-      	clicked = false
-
-	  $("#type_limit_id").change ->
+  $("#badge_badge_value").hide()	
+  $("#type_limit_id").change ->
 		  if $(this).val() == "4"
 		  	$("#badge_badge_value").show()
 		  else

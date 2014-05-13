@@ -46,31 +46,19 @@
     <% end %>
   </div>
 
-  <div>
+  <%= fields_for "badge",@badge.restriction.timeframe do |tf_type_form| %>
     <p>
-      <b> <%= f.label(:name,"Time limit?") %> </b>
-        <%= check_box("tag","limit") %>
-      </p>
-  </div>
-
-   <div id="timeframe_section">
-
-    <%= fields_for "badge",@badge.restriction.timeframe do |tf_type_form| %>
-      <p>
-        <%= f.label :timeframe %><br />
-        <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","Custom" => "4"},options ={:prompt => "-Choose time limit"}) %>
-      </p>
-    <% end %>
-    
-    <%= f.fields_for "badge",@badge.restriction.timeframe do |tf_value_form| %>
-      <p>
-        <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
-      </p>
-     
-
-    <% end %>
-    
-  </div>
+      <%= f.label :timeframe %><br />
+      <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","Custom" => "4"},options ={:prompt => "-Choose time limit"},:required => true) %>
+    </p>
+  <% end %>
+  
+  <%= f.fields_for "badge",@badge.restriction.timeframe do |tf_value_form| %>
+    <p>
+      <%= tf_value_form.number_field :value,placeholder: "Time limit in seconds", :maxlength=>"20" %>
+    </p>
+  <% end %>
+  
 
 
   <div class="actions">

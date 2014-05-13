@@ -47,7 +47,8 @@ class FactsController < ApplicationController
   def create
     @fact = Fact.new(fact_params)
     @feature = Feature.find(params[:feature][:id])
-    @activity = Activity.find(params[:activity][:id])
+    #@activity = Activity.find(params[:activity][:id])
+    @activity = nil
     @restriction = Restriction.new(:threshold => params[:fact][:threshold])
     @restriction.feature = @feature
     @restriction.activity = @activity
@@ -73,7 +74,8 @@ class FactsController < ApplicationController
     @restriction = Restriction.find(@fact.restriction_id)
     @restriction.update_attribute(:threshold,params[:fact][:threshold])
     @feature = Feature.find(params[:feature][:id])
-    @activity = Activity.find(params[:activity][:id])
+    #@activity = Activity.find(params[:activity][:id])
+    @activity = nil;
     @restriction.feature = @feature
     @restriction.activity = @activity
     @restriction.save

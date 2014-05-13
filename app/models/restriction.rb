@@ -11,6 +11,5 @@ class Restriction < ActiveRecord::Base
 
   validates :threshold, presence: true, :numericality => {:greater_than => 0}
   validates :feature, presence: true
-  validates :activity, presence: true
 	
 end
