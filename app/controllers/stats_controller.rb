@@ -341,7 +341,7 @@ class StatsController < ApplicationController
     #@stat = Stat.find(params[:id])
     @stat = current_user.stat
     
-    if !(@stat.daily).nil? || !(@stat.daily).empty? 
+    if !(@stat.daily).to_s == ' ' 
       daily_arr = JSON.parse(@stat.daily)
       @daily_chart_dist = dailyGraphs(daily_arr,"distance")
       @daily_chart_energ = dailyGraphs(daily_arr,"energy")
