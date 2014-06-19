@@ -346,6 +346,7 @@ class StatsController < ApplicationController
       @daily_chart_dist = dailyGraphs(daily_arr,"distance")
       @daily_chart_energ = dailyGraphs(daily_arr,"energy")
       @daily_chart_steps = dailyGraphs(daily_arr,"steps")
+      @pie_chart = build_pie_chart("Daily Activity Time","Time in seconds",build_daily_activity_time_values(JSON.parse(@stat.daily),'time'))
     end
 
     if !(@stat.weekly).to_s == ' '
@@ -361,8 +362,7 @@ class StatsController < ApplicationController
       @monthly_chart_energ = monthlyGraphs(monthly_arr,"energy")
       @monthly_chart_steps = monthlyGraphs(monthly_arr,"steps")
     end
-    
-    @pie_chart = build_pie_chart("Daily Activity Time","Time in seconds",build_daily_activity_time_values(JSON.parse(@stat.daily),'time'))
+
     @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal","teste")
 
     respond_to do |format|

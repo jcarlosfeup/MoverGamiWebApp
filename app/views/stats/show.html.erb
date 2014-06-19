@@ -88,6 +88,7 @@
 	<%= high_chart("daily_dist", @daily_chart_dist) %>
  	<%= high_chart("daily_energ", @daily_chart_energ) %>
  	<%= high_chart("daily_steps", @daily_chart_steps) %>
+ 	<%= high_chart("daily_activity_pie",@pie_chart) %>
 
 <% else %>
   <h3> No daily activity information available. <h3>
@@ -170,7 +171,7 @@
 	<%= high_chart("monthly_dist", @monthly_chart_dist) %>
 	<%= high_chart("monthly_energ", @monthly_chart_energ) %>
 	<%= high_chart("monthly_steps", @monthly_chart_steps) %>
-	<%= high_chart("daily_activity_pie",@pie_chart) %>
+	
 	<%= high_chart("my_bar_div", @stacked_column) %>
 	 
 
