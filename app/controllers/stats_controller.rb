@@ -405,7 +405,7 @@ class StatsController < ApplicationController
       @monthly_chart_steps = monthlyGraphs(monthly_arr,"steps")
     end
 
-    @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal",build_daily_kcal_burned_values(JSON.parse(@stat.weekly)),'energy')
+    @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal",build_daily_kcal_burned_values(JSON.parse(@stat.weekly),'energy'))
 
     respond_to do |format|
       format.html # show.html.erb
