@@ -341,21 +341,21 @@ class StatsController < ApplicationController
     #@stat = Stat.find(params[:id])
     @stat = current_user.stat
     
-    unless (@stat.daily).nil? 
+    unless (@stat.daily).any? 
       daily_arr = JSON.parse(@stat.daily)
       @daily_chart_dist = dailyGraphs(daily_arr,"distance")
       @daily_chart_energ = dailyGraphs(daily_arr,"energy")
       @daily_chart_steps = dailyGraphs(daily_arr,"steps")
     end
 
-    unless (@stat.weekly).nil?
+    unless (@stat.weekly).any?
       weekly_arr = JSON.parse(@stat.weekly)
       @weekly_chart_dist = weeklyGraphs(weekly_arr,"distance")
       @weekly_chart_energ = weeklyGraphs(weekly_arr,"energy")
       @weekly_chart_steps = weeklyGraphs(weekly_arr,"steps")
     end
 
-    unless (@stat.monthly).nil? 
+    unless (@stat.monthly).any? 
       monthly_arr = JSON.parse(@stat.monthly)
       @monthly_chart_dist = monthlyGraphs(monthly_arr,"distance")
       @monthly_chart_energ = monthlyGraphs(monthly_arr,"energy")
