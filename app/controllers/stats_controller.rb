@@ -316,14 +316,56 @@ class StatsController < ApplicationController
     return chart
   end
 
-  
+  def build_daily_kcal_burned_values(array_weekly,feature)
+
+      arr_looking = []
+      arr_walking = []
+      arr_cycling = []
+      arr_standing = []
+      arr_sitting = []
+      arr_tilting = []
+      arr_notusing = []
+      arr_laying = []
+      arr_running = []
+      arr = []
+      
+      unless array_weekly.nil?
+        for i in 0..6
+          arr_looking[i] = array_weekly[i.to_s]['lookingAtPhone'][feature]
+          arr_walking[i] = array_weekly[i.to_s]['walking'][feature]
+          arr_cycling[i] = array_weekly[i.to_s]['cycling'][feature]
+          arr_standing[i] = array_weekly[i.to_s]['standing'][feature]
+          arr_sitting[i] = array_weekly[i.to_s]['sitting'][feature]
+          arr_tilting[i] = array_weekly[i.to_s]['tilting'][feature]
+          arr_notusing[i] = array_weekly[i.to_s]['notUsingPhone'][feature]
+          arr_laying[i] = array_weekly[i.to_s]['laying'][feature]
+          arr_running[i] = array_weekly[i.to_s]['running'][feature]
+
+        end
+      end
+      
+      arr.push(arr_looking)
+      arr.push(arr_walking)
+      arr.push(arr_cycling)
+      arr.push(arr_standing)
+      arr.push(arr_sitting)
+      arr.push(arr_tilting)
+      arr.push(arr_laying)
+      arr.push(arr_standing)
+      arr.push(arr_running)
+
+      return arr
+  end
+
   def build_kcal_burned_columns(name,feature,data)
 
     stacked_column = LazyHighCharts::HighChart.new('column') do |f|
-      f.series(:name=>'Week 1',:data=> [3, 20, 3, 5, 4, 10, 12 ])
-      f.series(:name=>'Week 2',:data=>[1, 3, 4, 3, 13, 5, 4, 46] ) 
-      f.series(:name=>'Week 3',:data=>[2, 7, 8, 3, 3, 15, 4, 46] ) 
-      f.series(:name=>'Week 4',:data=>[4, 5, 10, 7, 2, 12, 14, 46] ) 
+      f.series(:name=>'Looking At Phone',:data=> data[0])
+      f.series(:name=>'Walking',:data=> data[1]) 
+      f.series(:name=>'Cycling',:data=> data[2]) 
+      f.series(:name=>'Standing',:data=> data[3]) 
+      f.series(:name=>'Sitting',:data=> data[4]) 
+      f.series(:name=>'Tilting',:data=> data[5]) 
       f.title({ :text=>name})
       
       f.options[:chart][:defaultSeriesType] = "column"
@@ -356,14 +398,14 @@ class StatsController < ApplicationController
       @weekly_chart_steps = weeklyGraphs(weekly_arr,"steps")
     end
 
-    unless !(@stat.monthly).to_s == ' '
+    if (@stat.monthly) != 'null'
       monthly_arr = JSON.parse(@stat.monthly)
       @monthly_chart_dist = monthlyGraphs(monthly_arr,"distance")
       @monthly_chart_energ = monthlyGraphs(monthly_arr,"energy")
       @monthly_chart_steps = monthlyGraphs(monthly_arr,"steps")
     end
 
-    @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal","teste")
+    @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal",build_daily_kcal_burned_values(JSON.parse(@stat.weekly)),'energy')
 
     respond_to do |format|
       format.html # show.html.erb
