@@ -29,7 +29,6 @@ class FactsController < ApplicationController
     @fact = Fact.new
     @restriction = @fact.build_restriction
     @feature = @restriction.build_feature
-    @activity = @restriction.build_activity
     
     respond_to do |format|
       format.html # new.html.erb
@@ -46,15 +45,13 @@ class FactsController < ApplicationController
   # POST /facts.json
   def create
     @fact = Fact.new(fact_params)
-    #@feature = Feature.find(params[:feature][:id])
-    #@activity = Activity.find(params[:activity][:id])
-    #@activity = nil
-    #@restriction = Restriction.new(:threshold => params[:fact][:threshold])
-    #@restriction.feature = @feature
-    #@restriction.activity = @activity
-    #@restriction.save
+    @feature = Feature.find(params[:feature][:id])
+
+    @restriction = Restriction.new(:threshold => params[:fact][:threshold])
+    @restriction.feature = @feature
+    @restriction.save
     
-    #@fact.restriction = @restriction
+    @fact.restriction = @restriction
     
   respond_to do |format|
       if @fact.save
@@ -74,8 +71,7 @@ class FactsController < ApplicationController
     @restriction = Restriction.find(@fact.restriction_id)
     @restriction.update_attribute(:threshold,params[:fact][:threshold])
     @feature = Feature.find(params[:feature][:id])
-    #@activity = Activity.find(params[:activity][:id])
-    @activity = nil;
+    
     @restriction.feature = @feature
     @restriction.activity = @activity
     @restriction.save
