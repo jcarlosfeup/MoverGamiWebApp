@@ -348,20 +348,20 @@ class StatsController < ApplicationController
       @daily_chart_steps = dailyGraphs(daily_arr,"steps")
     end
 
-    unless (@stat.weekly).any?
+    if !(@stat.weekly).to_s == ' '
       weekly_arr = JSON.parse(@stat.weekly)
       @weekly_chart_dist = weeklyGraphs(weekly_arr,"distance")
       @weekly_chart_energ = weeklyGraphs(weekly_arr,"energy")
       @weekly_chart_steps = weeklyGraphs(weekly_arr,"steps")
     end
 
-    unless (@stat.monthly).any? 
+    unless !(@stat.monthly).to_s == ' '
       monthly_arr = JSON.parse(@stat.monthly)
       @monthly_chart_dist = monthlyGraphs(monthly_arr,"distance")
       @monthly_chart_energ = monthlyGraphs(monthly_arr,"energy")
       @monthly_chart_steps = monthlyGraphs(monthly_arr,"steps")
     end
-
+    
     @pie_chart = build_pie_chart("Daily Activity Time","Time in seconds",build_daily_activity_time_values(JSON.parse(@stat.daily),'time'))
     @stacked_column = build_kcal_burned_columns("Weekly Kcal burned percentage","Kcal","teste")
 
