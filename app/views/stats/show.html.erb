@@ -29,7 +29,7 @@
 
 
 	
-<% if !(@stat.daily.to_s) == ' '  %>
+<% if @stat.daily %>
 	
 	<div id="daily">
 
@@ -95,7 +95,7 @@
 <% end %>
 
 
-<% if !(@stat.weekly).to_s == ' '  %>
+<% if @stat.weekly  %>
 	<div id="weekly">
 
 		<% weekly_json = JSON.parse(@stat.weekly) %>
@@ -135,7 +135,7 @@
   <h3> No weekly activity information available. <h3>
 <% end %>
 
-<% if !(@stat.monthly).to_s == ' '  %>
+<% if (@stat.monthly)  %>
 	<div id="monthly">
 
 		<% monthly_json = JSON.parse(@stat.monthly) %>

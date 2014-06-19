@@ -341,7 +341,7 @@ class StatsController < ApplicationController
     #@stat = Stat.find(params[:id])
     @stat = current_user.stat
     
-    if !(@stat.daily).to_s == ' ' 
+    if (@stat.daily) != 'null'
       daily_arr = JSON.parse(@stat.daily)
       @daily_chart_dist = dailyGraphs(daily_arr,"distance")
       @daily_chart_energ = dailyGraphs(daily_arr,"energy")
@@ -349,7 +349,7 @@ class StatsController < ApplicationController
       @pie_chart = build_pie_chart("Daily Activity Time","Time in seconds",build_daily_activity_time_values(JSON.parse(@stat.daily),'time'))
     end
 
-    if !(@stat.weekly).to_s == ' '
+    if (@stat.weekly) != 'null'
       weekly_arr = JSON.parse(@stat.weekly)
       @weekly_chart_dist = weeklyGraphs(weekly_arr,"distance")
       @weekly_chart_energ = weeklyGraphs(weekly_arr,"energy")
