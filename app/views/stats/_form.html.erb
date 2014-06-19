@@ -1,0 +1,33 @@
+<%= form_for(@stat) do |f| %>
+  <% if @stat.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stat.errors.count, "error") %> prohibited this stat from being saved:</h2>
+
+      <ul>
+      <% @stat.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :badgesUnlocked %><br />
+    <%= f.text_field :badgesUnlocked %>
+  </div>
+  <div class="field">
+    <%= f.label :factsCompleted %><br />
+    <%= f.text_field :factsCompleted %>
+  </div>
+  <div class="field">
+    <%= f.label :rewardsUnlocked %><br />
+    <%= f.text_field :rewardsUnlocked %>
+  </div>
+  <div class="field">
+    <%= f.label :challengesCompleted %><br />
+    <%= f.text_field :challengesCompleted %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

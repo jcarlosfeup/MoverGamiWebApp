@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140502105807) do
+ActiveRecord::Schema.define(:version => 20140603161805) do
 
   create_table "activities", :force => true do |t|
     t.string   "name"
@@ -68,9 +68,28 @@ ActiveRecord::Schema.define(:version => 20140502105807) do
 
   create_table "rewards", :force => true do |t|
     t.text     "url"
-    t.string   "type"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.text     "name"
+    t.integer  "level"
+    t.integer  "user_id"
+    t.integer  "unlocked"
+  end
+
+  create_table "stats", :force => true do |t|
+    t.decimal  "badgesUnlocked"
+    t.decimal  "factsCompleted"
+    t.decimal  "rewardsUnlocked"
+    t.decimal  "challengesCompleted"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.integer  "user_id"
+    t.integer  "level"
+    t.integer  "experience"
+    t.text     "alltime"
+    t.text     "daily"
+    t.text     "weekly"
+    t.text     "monthly"
   end
 
   create_table "timeframes", :force => true do |t|
@@ -88,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20140502105807) do
     t.boolean  "isAdmin"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+    t.integer  "stats_id"
   end
 
 end

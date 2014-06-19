@@ -52,6 +52,7 @@ GEM
     eventmachine (1.0.3)
     excon (0.33.0)
     execjs (2.0.2)
+    hash-deep-merge (0.1.1)
     heroku (3.6.0)
       heroku-api (~> 0.3.17)
       launchy (>= 0.3.2)
@@ -70,6 +71,9 @@ GEM
     json (1.8.1)
     launchy (2.4.2)
       addressable (~> 2.3)
+    lazy_high_charts (1.5.4)
+      bundler (>= 1.0)
+      hash-deep-merge
     less (2.5.0)
       commonjs (~> 0.2.7)
     less-rails (2.5.0)
@@ -161,6 +165,7 @@ DEPENDENCIES
   debugger
   heroku
   jquery-rails
+  lazy_high_charts
   less-rails
   pg
   rails (= 3.2.17)

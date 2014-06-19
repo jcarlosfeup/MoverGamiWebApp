@@ -88,6 +88,6 @@ class RewardsController < ApplicationController
     # params.require(:person).permit(:name, :age)
     # Also, you can specialize this method with per-user checking of permissible attributes.
     def reward_params
-      params.require(:reward).permit(:type, :url)
+      params.require(:reward).permit(:name, :url,:level,:unlocked)
     end
 end

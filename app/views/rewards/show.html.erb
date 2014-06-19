@@ -1,15 +1,27 @@
-<p id="notice"><%= notice %></p>
+<% if current_user %>
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Url:</b>
-  <%= @reward.url %>
-</p>
+	<p>
+	  <b>Name:</b>
+	  <%= @reward.name %>
+	</p>
 
-<p>
-  <b>Type:</b>
-  <%= @reward.type %>
-</p>
+	<p>
+	    <b>Image:</b> <br/>
+	     <%= image_tag(@reward.url,size: "300x320", alt: "reward_image") %>
+	  </p>
+
+	<p>
+	  <b>Rewarded on level: </b>
+	  <%= @reward.level %>
+	</p>
 
 
-<%= link_to 'Edit', edit_reward_path(@reward) %> |
-<%= link_to 'Back', rewards_path %>
+
+
+	<%= link_to 'Edit', edit_reward_path(@reward) %> |
+	<%= link_to 'Back', rewards_path %>
+	
+<% else %>
+  <h3> You must be logged in to proceed. <h3>
+<% end %>

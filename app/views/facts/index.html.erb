@@ -21,8 +21,7 @@
       <tr>
         <td><%= fact.id %></td>
         <td><%= fact.description %></td>
-        <td><%= fact.restriction.feature.name %></td>
-        <td><%= fact.restriction.threshold %></td>
+       
         <td><%= link_to 'Show', fact %></td>
         <td><%= link_to 'Edit', edit_fact_path(fact) %></td>
         <td><%= link_to 'Destroy', fact, method: :delete, data: { confirm: 'Are you sure?' } %></td>

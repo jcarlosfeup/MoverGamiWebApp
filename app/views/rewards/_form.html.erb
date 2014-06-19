@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_area :url %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.label :url %> (Link for medium size image) <br />
+    <%= f.text_field :url %>
   </div>
+  <div class="field">
+    <%= f.label :level %><br />
+    <%= f.number_field :level,:required => true, placeholder: "Digit level between 1 and 30", :maxlength=>"2" %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  badgesUnlocked: 9.99
+  factsCompleted: 9.99
+  rewardsUnlocked: 9.99
+  challengesCompleted: 9.99
+
+two:
+  badgesUnlocked: 9.99
+  factsCompleted: 9.99
+  rewardsUnlocked: 9.99
+  challengesCompleted: 9.99

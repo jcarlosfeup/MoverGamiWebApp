@@ -1,0 +1,12 @@
+
+<h1> <%= current_user.username %> STATS </h1>
+
+<p> <b> Number of badges unlocked: </b> </p>
+
+<p> <b> Number of facts completed: </b> </p>
+
+<p> <b> Rewards unlocked: </b> </p>
+
+<p> <b> Challenges completed: </b> </p>
+
+ <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","All Time" => "4"},options ={:prompt => "-Choose timeframe"}) %>

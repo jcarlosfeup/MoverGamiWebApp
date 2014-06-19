@@ -46,15 +46,15 @@ class FactsController < ApplicationController
   # POST /facts.json
   def create
     @fact = Fact.new(fact_params)
-    @feature = Feature.find(params[:feature][:id])
+    #@feature = Feature.find(params[:feature][:id])
     #@activity = Activity.find(params[:activity][:id])
-    @activity = nil
-    @restriction = Restriction.new(:threshold => params[:fact][:threshold])
-    @restriction.feature = @feature
-    @restriction.activity = @activity
-    @restriction.save
+    #@activity = nil
+    #@restriction = Restriction.new(:threshold => params[:fact][:threshold])
+    #@restriction.feature = @feature
+    #@restriction.activity = @activity
+    #@restriction.save
     
-    @fact.restriction = @restriction
+    #@fact.restriction = @restriction
     
   respond_to do |format|
       if @fact.save
