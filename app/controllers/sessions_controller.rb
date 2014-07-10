@@ -27,7 +27,11 @@ before_filter :save_login_state, :only => [:login, :login_attempt]
 
   
   def home
-  
+
+    if !current_user.isAdmin
+      current_user.stats_id = current_user.id
+      current_user.save
+    end
   end
 
   
