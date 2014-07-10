@@ -1,12 +1,35 @@
+<% if current_user.isAdmin %>
+  <%- model_class = User -%>
+  
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:id) %></th>
+        <th><%= model_class.human_attribute_name(:username) %></th>
+        <th><%=t '.actions', :default => t("Stats") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @users %>
+        <% @users.each do |user| %>
+        <% if !user.isAdmin %>
+          <tr>
+            <td><%= link_to user.id, user_path(user) %></td>
+            <td><%= user.username %></td>
+            <td>
+            	<% if user.stats_id %>
+              		<%= link_to "View", stat_path(user.stats_id),:class => 'btn btn-mini' %></li>
+              	<% else %>
+              		<p> Don't available </p>
+              	<%end %>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 
-<h1> <%= current_user.username %> STATS </h1>
-
-<p> <b> Number of badges unlocked: </b> </p>
-
-<p> <b> Number of facts completed: </b> </p>
-
-<p> <b> Rewards unlocked: </b> </p>
-
-<p> <b> Challenges completed: </b> </p>
-
- <%= select("type_limit","id", { "Daily" => "1", "Weekly" => "2","Monthly" => "3","All Time" => "4"},options ={:prompt => "-Choose timeframe"}) %>
+<%else %>
+	<h3> You still don't have statistics available! </h3>
+<% end %>

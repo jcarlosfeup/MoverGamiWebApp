@@ -28,11 +28,17 @@
               <li><%= link_to "Badges", badges_path %></li>
               <li><%= link_to "Challenges", challenges_path %></li>
               <li><%= link_to "Rewards", rewards_path %></li>
-              <% if current_user.stats_id %>
-                <li><%= link_to "Stats", stat_path(current_user.stats_id) %></li>
-              <%else%>
-                <li><%= link_to "Stats", rewards_path %></li>
-              <%end%>
+
+              <% if current_user.isAdmin %>
+                <li><%= link_to "Stats", stats_path %></li>
+              <% else %>
+                <% if current_user.stats_id %>
+                  <li><%= link_to "Stats", stat_path(current_user.stats_id) %></li>
+                <%else%>
+                  <li><%= link_to "Stats", stats_path %></li>
+                <%end%>
+              <% end %>
+              
               <li><%= link_to "Logout", logout_path %> </li>
             <% else %>
               <li><%= link_to "Sign up", new_user_path %> </li>

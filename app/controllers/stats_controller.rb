@@ -2,9 +2,10 @@ class StatsController < ApplicationController
   # GET /stats
   # GET /stats.json
   def index
+    @users = User.all
     @stats = Stat.all
 
-    respond_to do |format|
+   respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @stats }
     end
@@ -380,8 +381,8 @@ class StatsController < ApplicationController
   # GET /stats/1
   # GET /stats/1.json
   def show
-    #@stat = Stat.find(params[:id])
-    @stat = current_user.stat
+    @stat = Stat.find(params[:id])
+    #@stat = current_user.stat
     
     if (@stat.daily) != 'null'
       daily_arr = JSON.parse(@stat.daily)

@@ -17,6 +17,7 @@
     <tbody>
       <% if @users %>
         <% @users.each do |user| %>
+        <% if !user.isAdmin %>
           <tr>
             <td><%= link_to user.id, user_path(user) %></td>
             <td><%= user.username %></td>
@@ -32,6 +33,7 @@
                           :class => 'btn btn-mini btn-danger' %>
             </td>
           </tr>
+          <% end %>
         <% end %>
       <% end %>
     </tbody>

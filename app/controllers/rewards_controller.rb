@@ -3,6 +3,9 @@ class RewardsController < ApplicationController
   # GET /rewards.json
   def index
     @rewards = Reward.all
+
+    
+
     @rewards_json = @rewards.map{ |e| {:reward => e}}
 
     respond_to do |format|

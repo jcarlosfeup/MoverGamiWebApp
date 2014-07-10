@@ -1,9 +1,13 @@
 class User < ActiveRecord::Base
+	require 'digest'
 	attr_accessor :password
 	EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-	attr_accessible :username, :email, :password, :password_confirmation
+	attr_accessible :username, :email, :password, :password_confirmation,:isAdmin
 	has_one :stat
-	has_many :badges, dependent: :destroy
+	has_many :badges 
+	has_many :facts 
+	has_many :rewards
+	has_many :challenges
 
 	validates :username, presence: true, :uniqueness => true, :length => { :in => 4..20 }
 	validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
@@ -16,8 +20,12 @@ class User < ActiveRecord::Base
 	def encrypt_password
 	  
 	  if password.present?
-	    self.salt = BCrypt::Engine.generate_salt
-	    self.encrypted_password= BCrypt::Engine.hash_secret(password,salt)
+	    #self.salt = BCrypt::Engine.generate_salt
+	    md5 = Digest::MD5.new
+		md5.update password
+		
+	    #self.encrypted_password= BCrypt::Engine.hash_secret(password,salt)
+	    self.encrypted_password = md5.hexdigest 
 	  end
 	end
 
@@ -40,7 +48,8 @@ class User < ActiveRecord::Base
 	end   
 	
 	def match_password(login_password="")
-		encrypted_password == BCrypt::Engine.hash_secret(login_password,salt)
+		md5 = Digest::MD5.new
+		md5.update login_password
+		encrypted_password == md5.hexdigest
 	end
-
 end
