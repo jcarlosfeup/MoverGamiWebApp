@@ -15,10 +15,11 @@ end
 def index
 
 	@users = User.all
+  @users_json = @users.map{ |e| {:user => e}}
 
   respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @users_json }
   end
 end
 
