@@ -5,9 +5,11 @@ class StatsController < ApplicationController
     @users = User.all
     @stats = Stat.all
 
+    @stats_json = @stats.map{ |e| {:stat => e}}
+
    respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @stats }
+      format.json { render json: @stats_json }
     end
   end
 
@@ -382,6 +384,7 @@ class StatsController < ApplicationController
   # GET /stats/1.json
   def show
     @stat = Stat.find(params[:id])
+    @user = User.find(params[:id])
     #@stat = current_user.stat
     
     if (@stat.daily) != 'null'
@@ -434,7 +437,7 @@ class StatsController < ApplicationController
   # POST /stats.json
   def create
     
-    @user = User.find(params[:stat][:user_id])
+    @user = User.find(params[:stat][:user_web_id])
     j = ActiveSupport::JSON
 
     if @user.stat

@@ -15,9 +15,8 @@ end
 def index
 
 	@users = User.all
-  @stats = Stat.all
 
-  @users_json = @users.map{ |e| e.stat ? { :user => e.stat.level} : {:user => e}}
+  @users_json = @users.map{ |e| { :user => e}}
 
   respond_to do |format|
       format.html # index.html.erb
