@@ -441,7 +441,7 @@ class StatsController < ApplicationController
     j = ActiveSupport::JSON
 
     if @user.stat
-      @stat = Stat.find(params[:stat][:user_id])
+      @stat = Stat.find(params[:stat][:user_web_id])
       @stat.update_attributes(stat_params)
       
       alltime_data = params[:stat][:alltime]
