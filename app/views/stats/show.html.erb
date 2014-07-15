@@ -35,28 +35,30 @@
 
 		<% daily_json = JSON.parse(@stat.daily) %>
 		
-		<p> <h4> Total Daily activity </h4>  </p> </br>
-		<p> <b> Total distance travelled: </b> <%= daily_json['daytotal']['lookingAtPhone']['distanceTraveled'] + 
-												   daily_json['daytotal']['walking']['distanceTraveled']	+
-												   daily_json['daytotal']['cycling']['distanceTraveled'] +
-												   daily_json['daytotal']['standing']['distanceTraveled'] +
-												   daily_json['daytotal']['running']['distanceTraveled'] %> meters </p>
-		
-		<p> <b> Total steps given: </b> <%= daily_json['daytotal']['lookingAtPhone']['steps'] + 
-												   daily_json['daytotal']['walking']['steps']	+
-												   daily_json['daytotal']['cycling']['steps'] +
-												   daily_json['daytotal']['standing']['steps'] +
-												   daily_json['daytotal']['running']['steps'] %> steps </p>
-		
-		<p> <b> Total energy expanded: </b> <%= daily_json['daytotal']['lookingAtPhone']['energy'] + 
-												   daily_json['daytotal']['walking']['energy']	+
-												   daily_json['daytotal']['cycling']['energy'] +
-												   daily_json['daytotal']['standing']['energy'] +
-												   daily_json['daytotal']['sitting']['energy'] +
-												   daily_json['daytotal']['tilting']['energy'] +
-												   daily_json['daytotal']['notUsingPhone']['energy'] +
-												   daily_json['daytotal']['laying']['energy'] +
-												   daily_json['daytotal']['running']['energy']  %> kcal </p>
+		<% if daily_json['daytotal'] %>
+			<p> <h4> Total Daily activity </h4>  </p> </br>
+			<p> <b> Total distance travelled: </b> <%= daily_json['daytotal']['lookingAtPhone']['distanceTraveled'] + 
+													   daily_json['daytotal']['walking']['distanceTraveled']	+
+													   daily_json['daytotal']['cycling']['distanceTraveled'] +
+													   daily_json['daytotal']['standing']['distanceTraveled'] +
+													   daily_json['daytotal']['running']['distanceTraveled'] %> meters </p>
+			
+			<p> <b> Total steps given: </b> <%= daily_json['daytotal']['lookingAtPhone']['steps'] + 
+													   daily_json['daytotal']['walking']['steps']	+
+													   daily_json['daytotal']['cycling']['steps'] +
+													   daily_json['daytotal']['standing']['steps'] +
+													   daily_json['daytotal']['running']['steps'] %> steps </p>
+			
+			<p> <b> Total energy expanded: </b> <%= daily_json['daytotal']['lookingAtPhone']['energy'] + 
+													   daily_json['daytotal']['walking']['energy']	+
+													   daily_json['daytotal']['cycling']['energy'] +
+													   daily_json['daytotal']['standing']['energy'] +
+													   daily_json['daytotal']['sitting']['energy'] +
+													   daily_json['daytotal']['tilting']['energy'] +
+													   daily_json['daytotal']['notUsingPhone']['energy'] +
+													   daily_json['daytotal']['laying']['energy'] +
+													   daily_json['daytotal']['running']['energy']  %> kcal </p>
+		<% end %>
 
 		<h3> Daily activity per hour </h3>
 		<!-- <% for i in 0..23 %>
@@ -100,28 +102,30 @@
 
 		<% weekly_json = JSON.parse(@stat.weekly) %>
 
-		<p> <h4> Total activity during week </h4>  </p> </br>
-		<p> <b> Total distance travelled: </b> <%= weekly_json['weektotal']['lookingAtPhone']['distanceTraveled'] + 
-												   weekly_json['weektotal']['walking']['distanceTraveled']	+
-												   weekly_json['weektotal']['cycling']['distanceTraveled'] +
-												   weekly_json['weektotal']['standing']['distanceTraveled'] +
-												   weekly_json['weektotal']['running']['distanceTraveled'] %> meters </p>
-		
-		<p> <b> Total steps given: </b> <%= weekly_json['weektotal']['lookingAtPhone']['steps'] + 
-												   weekly_json['weektotal']['walking']['steps']	+
-												   weekly_json['weektotal']['cycling']['steps'] +
-												   weekly_json['weektotal']['standing']['steps'] +
-												   weekly_json['weektotal']['running']['steps'] %> steps </p>
-		
-		<p> <b> Total energy expanded: </b> <%= weekly_json['weektotal']['lookingAtPhone']['energy'] + 
-												   weekly_json['weektotal']['walking']['energy']	+
-												   weekly_json['weektotal']['cycling']['energy'] +
-												   weekly_json['weektotal']['standing']['energy'] +
-												   weekly_json['weektotal']['sitting']['energy'] +
-												   weekly_json['weektotal']['tilting']['energy'] +
-												   weekly_json['weektotal']['notUsingPhone']['energy'] +
-												   weekly_json['weektotal']['laying']['energy'] +
-												   weekly_json['weektotal']['running']['energy']  %> kcal </p>
+		<% if weekly_json['weektotal'] %>
+			<p> <h4> Total activity during week </h4>  </p> </br>
+			<p> <b> Total distance travelled: </b> <%= weekly_json['weektotal']['lookingAtPhone']['distanceTraveled'] + 
+													   weekly_json['weektotal']['walking']['distanceTraveled']	+
+													   weekly_json['weektotal']['cycling']['distanceTraveled'] +
+													   weekly_json['weektotal']['standing']['distanceTraveled'] +
+													   weekly_json['weektotal']['running']['distanceTraveled'] %> meters </p>
+			
+			<p> <b> Total steps given: </b> <%= weekly_json['weektotal']['lookingAtPhone']['steps'] + 
+													   weekly_json['weektotal']['walking']['steps']	+
+													   weekly_json['weektotal']['cycling']['steps'] +
+													   weekly_json['weektotal']['standing']['steps'] +
+													   weekly_json['weektotal']['running']['steps'] %> steps </p>
+			
+			<p> <b> Total energy expanded: </b> <%= weekly_json['weektotal']['lookingAtPhone']['energy'] + 
+													   weekly_json['weektotal']['walking']['energy']	+
+													   weekly_json['weektotal']['cycling']['energy'] +
+													   weekly_json['weektotal']['standing']['energy'] +
+													   weekly_json['weektotal']['sitting']['energy'] +
+													   weekly_json['weektotal']['tilting']['energy'] +
+													   weekly_json['weektotal']['notUsingPhone']['energy'] +
+													   weekly_json['weektotal']['laying']['energy'] +
+													   weekly_json['weektotal']['running']['energy']  %> kcal </p>
+		<% end %>
 
 		<h3> Week activity per day </h3>
 		
@@ -140,28 +144,30 @@
 
 		<% monthly_json = JSON.parse(@stat.monthly) %>
 
-		<p> <h4> Total activity during month </h4>  </p> </br>
-		<p> <b> Total distance travelled: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['distanceTraveled'] + 
-												   monthly_json['monthtotal']['walking']['distanceTraveled']	+
-												   monthly_json['monthtotal']['cycling']['distanceTraveled'] +
-												   monthly_json['monthtotal']['standing']['distanceTraveled'] +
-												   monthly_json['monthtotal']['running']['distanceTraveled'] %> meters </p>
-		
-		<p> <b> Total steps given: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['steps'] + 
-												   monthly_json['monthtotal']['walking']['steps']	+
-												   monthly_json['monthtotal']['cycling']['steps'] +
-												   monthly_json['monthtotal']['standing']['steps'] +
-												   monthly_json['monthtotal']['running']['steps'] %> steps </p>
-		
-		<p> <b> Total energy expanded: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['energy'] + 
-												   monthly_json['monthtotal']['walking']['energy']	+
-												   monthly_json['monthtotal']['cycling']['energy'] +
-												   monthly_json['monthtotal']['standing']['energy'] +
-												   monthly_json['monthtotal']['sitting']['energy'] +
-												   monthly_json['monthtotal']['tilting']['energy'] +
-												   monthly_json['monthtotal']['notUsingPhone']['energy'] +
-												   monthly_json['monthtotal']['laying']['energy'] +
-												   monthly_json['monthtotal']['running']['energy']  %> kcal </p>
+		<% if monthly_json['monthtotal'] %>
+			<p> <h4> Total activity during month </h4>  </p> </br>
+			<p> <b> Total distance travelled: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['distanceTraveled'] + 
+													   monthly_json['monthtotal']['walking']['distanceTraveled']	+
+													   monthly_json['monthtotal']['cycling']['distanceTraveled'] +
+													   monthly_json['monthtotal']['standing']['distanceTraveled'] +
+													   monthly_json['monthtotal']['running']['distanceTraveled'] %> meters </p>
+			
+			<p> <b> Total steps given: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['steps'] + 
+													   monthly_json['monthtotal']['walking']['steps']	+
+													   monthly_json['monthtotal']['cycling']['steps'] +
+													   monthly_json['monthtotal']['standing']['steps'] +
+													   monthly_json['monthtotal']['running']['steps'] %> steps </p>
+			
+			<p> <b> Total energy expanded: </b> <%= monthly_json['monthtotal']['lookingAtPhone']['energy'] + 
+													   monthly_json['monthtotal']['walking']['energy']	+
+													   monthly_json['monthtotal']['cycling']['energy'] +
+													   monthly_json['monthtotal']['standing']['energy'] +
+													   monthly_json['monthtotal']['sitting']['energy'] +
+													   monthly_json['monthtotal']['tilting']['energy'] +
+													   monthly_json['monthtotal']['notUsingPhone']['energy'] +
+													   monthly_json['monthtotal']['laying']['energy'] +
+													   monthly_json['monthtotal']['running']['energy']  %> kcal </p>
+		<% end %>
 
 		<h3> Month activity per day </h3>
 
