@@ -4,8 +4,6 @@ class RewardsController < ApplicationController
   def index
     @rewards = Reward.all
 
-    
-
     @rewards_json = @rewards.map{ |e| {:reward => e}}
 
     respond_to do |format|

@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 	before_save :encrypt_password
 	after_save :clear_password
 
+	#encrypts password using MD5
 	def encrypt_password
 	  
 	  if password.present?
@@ -47,6 +48,7 @@ class User < ActiveRecord::Base
 		end
 	end   
 	
+	#checks if password is equal
 	def match_password(login_password="")
 		md5 = Digest::MD5.new
 		md5.update login_password

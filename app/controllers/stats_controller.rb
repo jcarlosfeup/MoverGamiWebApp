@@ -13,6 +13,7 @@ class StatsController < ApplicationController
     end
   end
 
+  # Arranges daily data for each hour of the day
   def build__daily_array_values(array_daily,activity,feature)
     arr = []
     for i in 0..23
@@ -22,6 +23,7 @@ class StatsController < ApplicationController
     return arr
   end
 
+  #Build up daily graphs of different types
   def dailyGraphs(array_daily,type)
     
     #array argument comes from params[:stat][:daily]
@@ -90,6 +92,7 @@ class StatsController < ApplicationController
     return @chart
   end
 
+   # Arranges weekly data for each day of the week
    def build__weekly_array_values(array_weekly,activity,feature)
     arr = []
     for i in 0..6
@@ -99,6 +102,7 @@ class StatsController < ApplicationController
     return arr
   end
 
+  # Build up weekly graphs of different types
   def weeklyGraphs(array_weekly,type)
 
      if type == "distance"
@@ -159,13 +163,10 @@ class StatsController < ApplicationController
         f.legend(:align => 'right', :verticalAlign => 'top', :y => 75, :x => -50, :layout => 'vertical',)
         f.chart({:defaultSeriesType=>"line"})
       end
-
     end
-
-
-
   end
 
+   # Arranges monthly data for each day of the month
   def build__monthly_array_values(array_monthly,activity,feature)
     arr = []
     for i in 0..30
@@ -175,6 +176,7 @@ class StatsController < ApplicationController
     return arr
   end
 
+  # Build up monthly graphs of different types
   def monthlyGraphs(array_monthly,type)
 
      if type == "distance"
@@ -239,6 +241,7 @@ class StatsController < ApplicationController
     end
   end
 
+  # Method that converts seconds to hours
   def convertSeconds_to_Hours(time_in_seconds)
       
     mm, ss = time_in_seconds.divmod(60)            
@@ -250,6 +253,7 @@ class StatsController < ApplicationController
     return array_time
   end
 
+   # Arranjes daily data into an array regarding the time spent in each activity
    def build_daily_activity_time_values(array_daily,feature)
     
     arr = []
@@ -278,6 +282,7 @@ class StatsController < ApplicationController
     arr_notusing = ['Not using phone(%dh%d:%ds)' % convertSeconds_to_Hours(total_notUsingPhone),total_notUsingPhone]
     arr_laying = ['Laying(%dh%d:%ds)' % convertSeconds_to_Hours(total_laying),total_laying]
     arr_running = ['Running(%dh%d:%ds)' % convertSeconds_to_Hours(total_running),total_running]
+    
     arr[0] = arr_looking
     arr[1] = arr_walking
     arr[2] = arr_cycling
@@ -291,6 +296,7 @@ class StatsController < ApplicationController
     return arr
   end
 
+  # Builds up a pie chart graph
   def build_pie_chart(name,stat,data)
 
     chart = LazyHighCharts::HighChart.new('pie') do |f|
@@ -319,6 +325,7 @@ class StatsController < ApplicationController
     return chart
   end
 
+  # Arranjes daily data into an array regarding kcal burned in each day of the week
   def build_daily_kcal_burned_values(array_weekly,feature)
 
       arr_looking = []
@@ -360,6 +367,7 @@ class StatsController < ApplicationController
       return arr
   end
 
+  # Builds up a stacked columns graph
   def build_kcal_burned_columns(name,feature,data)
 
     stacked_column = LazyHighCharts::HighChart.new('column') do |f|
@@ -440,6 +448,7 @@ class StatsController < ApplicationController
     @user = User.find(params[:stat][:user_web_id])
     j = ActiveSupport::JSON
 
+    #If user already possess some statistics
     if @user.stat
       @stat = Stat.find(params[:stat][:user_web_id])
       @stat.update_attributes(stat_params)

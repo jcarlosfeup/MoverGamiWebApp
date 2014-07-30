@@ -31,8 +31,10 @@ end
 
 gem 'strong_parameters'
 
+#used for password encryption
 gem 'bcrypt', :require => 'bcrypt'
 
+#to deploy to server
 gem 'heroku'
 
 group :production do
